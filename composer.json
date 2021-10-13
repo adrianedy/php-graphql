@@ -1,0 +1,6 @@
+{
+    "require": {
+        "webonyx/graphql-php": "^14.9",
+        "mongodb/mongodb": "^1.9"
+    }
+}
