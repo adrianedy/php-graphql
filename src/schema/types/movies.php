@@ -165,11 +165,34 @@ $moviesQuery = [
         'limit' => [
             'type' => Type::int(),
             'defaultValue' => 10
+        ],
+        'countries' => [
+            'type' => Type::listOf(Type::string()),
+        ],
+        'rated' => [
+            'type' => Type::string(),
+        ],
+        'languages' => [
+            'type' => Type::listOf(Type::string()),
         ]
     ],
     'resolve' => function ($rootValue, $args) {
+        $filter = [];
+
+        if (isset($args['rated'])) {
+            $filter['rated'] = $args['rated'];
+        }
+
+        if (isset($args['countries'])) {
+            $filter['countries'] = $args['countries'];
+        }
+
+        if (isset($args['languages'])) {
+            $filter['languages'] = $args['languages'];
+        }
+
         return db_collection("movies")->find(
-            [],
+            $filter,
             [
                 'limit' => $args['limit'],
             ]
